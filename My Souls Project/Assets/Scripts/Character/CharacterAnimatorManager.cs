@@ -1,0 +1,25 @@
+using MySoulsProject;
+using UnityEngine;
+
+namespace MyNamespace
+{
+    public class CharacterAnimatorManager : MonoBehaviour
+    {
+        CharacterManager characterManager;
+
+        float vertical;
+        float horizontal;
+        
+        protected virtual void Awake()
+        {
+            characterManager = GetComponent<CharacterManager>();
+        }
+        
+        public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue)
+        {
+            characterManager.animator.SetFloat("Horizontal", horizontalValue, 0.1f, Time.deltaTime);
+            characterManager.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
+        }
+    }
+}
+

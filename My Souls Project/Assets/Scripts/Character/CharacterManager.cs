@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using MyNamespace;
+using Unity.Netcode;
+using UnityEngine;
+
+namespace MySoulsProject
+{
+    public class CharacterManager : NetworkBehaviour
+    {
+        [HideInInspector] public CharacterController characterController;
+        [HideInInspector] public Animator animator;
+        
+        [HideInInspector] public CharacterNetworkManager characterNetworkManager;
+        protected virtual void Awake()
+        {
+            DontDestroyOnLoad(this);
+
+            characterController = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
+            characterNetworkManager = GetComponent<CharacterNetworkManager>();
+        }
+
+        protected virtual void Update()
+        {
+            // caracter controlat local => network position = our transformer
+            if (IsOwner)
+            {
+                characterNetworkManager.networkPosition.Value = transform.position;
+                characterNetworkManager.networkRotation.Value = transform.rotation;
+            }
+            // caracter controlat din exteror => network position = its network transformer
+            else
+            {
+                // Position
+                transform.position = Vector3.SmoothDamp(
+                    transform.position,
+                    characterNetworkManager.networkPosition.Value,
+                    ref characterNetworkManager.networkPositionVelocity,
+                    characterNetworkManager.networkPositionSmoothTime);
+
+                // Rotation
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation, 
+                    characterNetworkManager.networkRotation.Value,
+                    characterNetworkManager.networkRotationSmoothTime);
+            }
+        }
+
+        protected virtual void LateUpdate()
+        {
+            
+        }
+
+    }
+}
