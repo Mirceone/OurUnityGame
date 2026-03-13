@@ -1,6 +1,7 @@
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace MySoulsProject
 {
@@ -22,7 +23,11 @@ namespace MySoulsProject
         [SerializeField] Vector2 cameraInput;
         public float cameraVerticalInput;
         public float cameraHorizontalInput;
-
+        
+        [Header("Player Actions Input")]
+        [SerializeField] bool dodgeInput = false;
+        
+        
         private void Awake()
         {
             if(Singleton == null)
@@ -66,6 +71,7 @@ namespace MySoulsProject
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             }
 
             playerControls.Enable();
@@ -129,6 +135,15 @@ namespace MySoulsProject
             cameraHorizontalInput = cameraInput.x;
             
             
+        }
+
+        private void HandleDodgeInput()
+        {
+            if (dodgeInput)
+            {
+                dodgeInput = false;
+                
+            }
         }
     }
 }
