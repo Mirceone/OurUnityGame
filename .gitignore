@@ -10,7 +10,21 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
+[Ll]ayouts/
 *.log
+
+# Unity auto-generated user/editor settings at project root
+EditorUserSettings.asset
+EditorUserSettings.asset.meta
+PlayModeUserSettings.asset
+PlayModeUserSettings.asset.meta
+Search.index
+Search.index.meta
+Search.settings
+Search.settings.meta
+
+# Solution files (all formats)
+*.slnx
 
 # Added by Mirceone, ignoring .DS-Store (macos specific file)
 **/.DS_Store
@@ -33,6 +47,9 @@
 /[Aa]ssets/Plugins/Editor/JetBrains*
 # Jetbrains Rider personal-layer settings
 *.DotSettings.user
+
+# Stray IDE folders inside Assets
+[Aa]ssets/**/.idea/
 
 # Visual Studio cache directory
 .vs/
