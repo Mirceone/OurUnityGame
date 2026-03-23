@@ -125,6 +125,9 @@ namespace MySoulsProject
 
         public void AttemptToPerformDodge()
         {
+            //if (player.isPerformingAction)
+                //return;
+            
             if (PlayerInputManager.Singleton.moveAmount > 0)
             {
                 // Performing a roll, because we are not stationary
@@ -136,6 +139,8 @@ namespace MySoulsProject
            
                 Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
                 player.transform.rotation = playerRotation;
+                
+                player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true);
             }
             else
             {

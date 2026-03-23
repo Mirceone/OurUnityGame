@@ -20,6 +20,14 @@ namespace MyNamespace
             characterManager.animator.SetFloat("Horizontal", horizontalValue, 0.1f, Time.deltaTime);
             characterManager.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
         }
+
+        public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction,
+            bool applyRootMotion = true)
+        {
+            characterManager.animator.applyRootMotion = applyRootMotion;
+            characterManager.animator.CrossFade(targetAnimation, 0.2f);
+            characterManager.isPerformingAction = isPerformingAction;
+        }
     }
 }
 

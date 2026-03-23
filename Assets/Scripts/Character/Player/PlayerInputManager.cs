@@ -100,9 +100,17 @@ namespace MySoulsProject
 
         private void Update()
         {
+           HandleAllInputs();
+        }
+
+        private void HandleAllInputs()
+        {
             HandlePlayerMovementInput();
             HandeleCameraMovementInput();
+            HandleDodgeInput();
         }
+        
+        // MOVEMENT
     
         private void HandlePlayerMovementInput()
         {
@@ -128,7 +136,6 @@ namespace MySoulsProject
             // mergem in doar in fata si camera intoarce player ul
             player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
         }
-
         private void HandeleCameraMovementInput()
         {
             cameraVerticalInput = cameraInput.y;
@@ -136,12 +143,15 @@ namespace MySoulsProject
             
             
         }
-
+        
+        // ACTIONS
         private void HandleDodgeInput()
         {
             if (dodgeInput)
             {
                 dodgeInput = false;
+                
+                player.playerLocomotionManager.AttemptToPerformDodge();
                 
             }
         }
