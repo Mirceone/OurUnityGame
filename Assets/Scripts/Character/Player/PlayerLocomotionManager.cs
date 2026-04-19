@@ -51,6 +51,7 @@ namespace MySoulsProject
         
         public void HandleAllMovement()
         {
+            
             HandleGroundedMovement();
             HandleRotation();
             // aerial movement
@@ -67,6 +68,9 @@ namespace MySoulsProject
 
         private void HandleGroundedMovement()
         {
+            
+            if (!player.canMove)
+                return;
             GetMovementValues();
             // movement based on camera perspective + our inputs
             var cam = PlayerCamera.Singleton.transform;
@@ -101,8 +105,11 @@ namespace MySoulsProject
             // }
         }
 
-        private void HandleRotation()
+        private void  HandleRotation()
         {
+            if (!player.canRotate)
+                return;
+            
             if (PlayerInputManager.Singleton.moveAmount <= 0f) return;
             
             targetRotationDirection = Vector3.zero;
@@ -125,8 +132,8 @@ namespace MySoulsProject
 
         public void AttemptToPerformDodge()
         {
-            //if (player.isPerformingAction)
-                //return;
+            if (player.isPerformingAction)
+                return;
             
             if (PlayerInputManager.Singleton.moveAmount > 0)
             {
@@ -140,11 +147,12 @@ namespace MySoulsProject
                 Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
                 player.transform.rotation = playerRotation;
                 
-                player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true);
+                player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true, true);
             }
             else
             {
                 // Performing a backstep, because we are stationary
+                player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
                 
             }
         }

@@ -5,28 +5,35 @@ namespace MyNamespace
 {
     public class CharacterAnimatorManager : MonoBehaviour
     {
-        CharacterManager characterManager;
+        CharacterManager character;
 
         float vertical;
         float horizontal;
         
         protected virtual void Awake()
         {
-            characterManager = GetComponent<CharacterManager>();
+            character = GetComponent<CharacterManager>();
         }
         
         public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue)
         {
-            characterManager.animator.SetFloat("Horizontal", horizontalValue, 0.1f, Time.deltaTime);
-            characterManager.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
+            character.animator.SetFloat("Horizontal", horizontalValue, 0.1f, Time.deltaTime);
+            character.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
         }
 
-        public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction,
-            bool applyRootMotion = true)
+        public virtual void PlayTargetActionAnimation(
+            string targetAnimation, 
+            bool isPerformingAction,
+            bool applyRootMotion = true, 
+            bool canRotate = false, 
+            bool canMove = false)
         {
-            characterManager.animator.applyRootMotion = applyRootMotion;
-            characterManager.animator.CrossFade(targetAnimation, 0.2f);
-            characterManager.isPerformingAction = isPerformingAction;
+            character.applyRootMotion = applyRootMotion;
+            character.animator.CrossFade(targetAnimation, 0.2f);
+            character.isPerformingAction = isPerformingAction;
+            
+            character.canRotate = canRotate;
+            character.canMove = canMove;
         }
     }
 }
