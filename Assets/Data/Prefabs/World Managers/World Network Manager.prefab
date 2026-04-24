@@ -49,7 +49,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 7757438263342798675}
-    PlayerPrefab: {fileID: 447566486673787888, guid: 8c2a409fd90944506ba2b66669744888, type: 3}
+    PlayerPrefab: {fileID: 447566486673787888, guid: 61dc74f7dcbd74f7386b54922ad4ef80, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: e18f5edbf20ed4ad1986b047d667daa3, type: 2}
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Transports.UTP.UnityTransport
   m_ProtocolType: 0
-  m_UseWebSockets: 0
+  m_UseWebSockets: 1
   m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144

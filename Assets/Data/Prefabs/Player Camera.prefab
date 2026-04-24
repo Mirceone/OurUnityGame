@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7414032426421170407}
   m_Layer: 0
   m_Name: Player Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe4351e5c6c44f919eb9b8c30872bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
-  player: {fileID: 0}
+  player: {fileID: 6967370054572193534, guid: 61dc74f7dcbd74f7386b54922ad4ef80, type: 3}
   cameraObject: {fileID: 8675079534951940701}
   cameraPivotTransform: {fileID: 3585585926232712834}
   leftAndRightRotationSpeed: 220

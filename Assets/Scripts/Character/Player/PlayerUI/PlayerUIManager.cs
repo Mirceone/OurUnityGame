@@ -6,8 +6,11 @@ namespace MySoulsProject
     public class PlayerUIManager : MonoBehaviour
     {
         public static PlayerUIManager Singleton;
+        
         [Header("NETWORK JOIN")]
         [SerializeField] bool startGameAsClient;
+        
+        [HideInInspector] public PlayerUIHudManager playerUIHudManager;
 
         private void Awake()
         {
@@ -19,6 +22,8 @@ namespace MySoulsProject
             {
                 Destroy(gameObject);
             }
+            
+            playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
         }
 
         private void Start()

@@ -7,30 +7,34 @@ namespace MySoulsProject
 {
     public class PlayerInputManager : MonoBehaviour
     {
+        //  INPUT CONTROLS
+        private PlayerControls playerControls;
+
+        //  SINGLETON
         public static PlayerInputManager Singleton;
-        
+
+        //  LOCAL PLAYER
         public PlayerManager player;
-        
-        PlayerControls playerControls;
-        
-        [Header("Movement Input")]
+
+        [Header("CAMERA MOVEMENT INPUT")]
+        [SerializeField] Vector2 cameraInput;
+        public float cameraVerticalInput;
+        public float cameraHorizontalInput;
+
+        [Header("PLAYER MOVEMENT INPUT")]
         [SerializeField] Vector2 movementInput;
         public float verticalInput;
         public float horizontalInput;
         public float moveAmount;
-        
-        [Header("Camera Movement Input")]
-        [SerializeField] Vector2 cameraInput;
-        public float cameraVerticalInput;
-        public float cameraHorizontalInput;
-        
-        [Header("Player Actions Input")]
+
+        [Header("PLAYER ACTION INPUT")]
         [SerializeField] bool dodgeInput = false;
-        
-        
+        [SerializeField] bool sprintInput = false;
+        [SerializeField] bool jumpInput = false;
+
         private void Awake()
         {
-            if(Singleton == null)
+            if (Singleton == null)
             {
                 Singleton = this;
             }
@@ -38,25 +42,27 @@ namespace MySoulsProject
             {
                 Destroy(gameObject);
             }
-            
         }
 
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
 
+            //  WHEN THE SCENE CHANGES, RUN THIS LOGIC
             SceneManager.activeSceneChanged += OnSceneChange;
-            
+
             Singleton.enabled = false;
         }
+
         private void OnSceneChange(Scene oldScene, Scene newScene)
         {
-            // IF THE NEW SCENE IS THE WORLD SCENE, ENABLE THE PLAYER INPUT MANAGER
-            // SO THE PLAYER CAN MOVE AROUND IN FUTURE SCENES(character creation, selector, etc.)
-            if(newScene.buildIndex == WorldSaveGameManager.Singleton.GetWorldSceneIndex())
+            //  IF WE ARE LOADING INTO OUR WORLD SCENE, ENABLE OUR PLAYERS CONTROLS
+            if (newScene.buildIndex == WorldSaveGameManager.Singleton.GetWorldSceneIndex())
             {
                 Singleton.enabled = true;
             }
+            //  OTHERWISE WE MUST BE AT THE MAIN MENU, DISABLE OUR PLAYERS CONTROLS
+            //  THIS IS SO OUR PLAYER CANT MOVE AROUND IF WE ENTER THINGS LIKE A CHARACTER CREATION MENU ECT
             else
             {
                 Singleton.enabled = false;
@@ -65,13 +71,19 @@ namespace MySoulsProject
 
         private void OnEnable()
         {
-            if(playerControls == null)
+            if (playerControls == null)
             {
                 playerControls = new PlayerControls();
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+                playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+
+                //  HOLDING THE INPUT, SETS THE BOOL TO TRUE
+                playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+                //  RELEASING THE INPUT, SETS THE BOOL TO FALSE
+                playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
             }
 
             playerControls.Enable();
@@ -79,15 +91,16 @@ namespace MySoulsProject
 
         private void OnDestroy()
         {
+            //  IF WE DESTROY THIS OBJECT, UNSUBSCRIBE FROM THIS EVENT
             SceneManager.activeSceneChanged -= OnSceneChange;
         }
 
-        // doar cel focusat preia input, ajuta atat la testing dar si nice to have in general
-        private void OnApplicationFocus(bool hasFocus)
+        //  IF WE MINIMIZE OR LOWER THE WINDOW, STOP ADJUSTING INPUTS
+        private void OnApplicationFocus(bool focus)
         {
             if (enabled)
             {
-                if (hasFocus)
+                if (focus)
                 {
                     playerControls.Enable();
                 }
@@ -100,59 +113,92 @@ namespace MySoulsProject
 
         private void Update()
         {
-           HandleAllInputs();
+            HandleAllInputs();
         }
 
         private void HandleAllInputs()
         {
             HandlePlayerMovementInput();
-            HandeleCameraMovementInput();
+            HandleCameraMovementInput();
             HandleDodgeInput();
+            HandleSprintInput();
+            HandleJumpInput();
         }
-        
-        // MOVEMENT
-    
+
+        //  MOVEMENT
+
         private void HandlePlayerMovementInput()
         {
             verticalInput = movementInput.y;
             horizontalInput = movementInput.x;
 
+            //  RETURNS THE ABSOLUTE NUMBER, (Meaning number without the negative sign, so its always positive)
             moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
-            // totally optional  dar am impresia ca si alte SOULS like dau clamp la movement, ca fie 0, 0,5 sau 1
-            if(moveAmount <= 0.5 && moveAmount > 0)
+            //  WE CLAMP THE VALUES, SO THEY ARE 0, 0.5 OR 1 (OPTIONAL)
+            if (moveAmount <= 0.5 && moveAmount > 0)
             {
                 moveAmount = 0.5f;
             }
-            else if(moveAmount > 0.5 && moveAmount <= 1)
+            else if (moveAmount > 0.5 && moveAmount <= 1)
             {
                 moveAmount = 1;
             }
 
+            // WHY DO WE PASS 0 ON THE HORIZONTAL? BECAUSE WE ONLY WANT NON-STRAFING MOVEMENT
+            // WE USE THE HORIZONTAL WHEN WE ARE STRAFING OR LOCKED ON
+
             if (player == null)
                 return;
-            
-            // Dc avem 0 pe horizontalValue?, pentru ca daca nu avem lock-on-target ON,
-            // mergem in doar in fata si camera intoarce player ul
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+
+            //  IF WE ARE NOT LOCKED ON, ONLY USE THE MOVE AMOUNT
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+
+            //  IF WE ARE LOCKED ON PASS THE HORIZONTAL MOVEMENT AS WELL
         }
-        private void HandeleCameraMovementInput()
+
+        private void HandleCameraMovementInput()
         {
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
-            
-            
         }
-        
-        // ACTIONS
+
+        //  ACTION
+
         private void HandleDodgeInput()
         {
             if (dodgeInput)
             {
                 dodgeInput = false;
-                
+
+                //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
+
                 player.playerLocomotionManager.AttemptToPerformDodge();
-                
+            }
+        }
+
+        private void HandleSprintInput()
+        {
+            if (sprintInput)
+            {
+                player.playerLocomotionManager.HandleSprinting();
+            }
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
+
+        private void HandleJumpInput()
+        {
+            if (jumpInput)
+            {
+                jumpInput = false;
+
+                //  IF WE HAVE A UI WINDOW OPEN, SIMPLY RETURN WITHOUT DOING ANYTHING
+
+                //  ATTEMPT TO PERFORM JUMP
+                player.playerLocomotionManager.AttemptToPerformJump();
             }
         }
     }

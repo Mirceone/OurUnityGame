@@ -1,7 +1,6 @@
-using MySoulsProject;
 using UnityEngine;
 
-namespace MyNamespace
+namespace MySoulsProject
 {
     public class PlayerCamera : MonoBehaviour
     {

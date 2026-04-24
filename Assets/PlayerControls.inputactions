@@ -18,17 +18,6 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "9f6c197d-19af-4c0c-a332-0868cf11731e",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Left Stick",
                     "id": "f021850f-e8b7-4e52-9980-5b5268a78278",
                     "path": "2DVector(mode=2)",
@@ -42,7 +31,7 @@
                 {
                     "name": "up",
                     "id": "b2167102-99e9-460c-8974-e5b8217c9bf3",
-                    "path": "<DualSenseGamepadHID>/leftStick/up",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -53,7 +42,7 @@
                 {
                     "name": "down",
                     "id": "94fa82ba-529c-475c-84d0-12e7d4624349",
-                    "path": "<DualSenseGamepadHID>/leftStick/down",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -64,7 +53,7 @@
                 {
                     "name": "left",
                     "id": "d4b1af3f-aa9e-4b29-8bb2-09329c99ad7d",
-                    "path": "<DualSenseGamepadHID>/leftStick/left",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -75,7 +64,7 @@
                 {
                     "name": "right",
                     "id": "fb616c0f-7961-4879-bdee-5287776dd847",
-                    "path": "<DualSenseGamepadHID>/leftStick/right",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -156,17 +145,6 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "0cec4b67-46e1-495b-9b92-aee5b5790d18",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Right Stick",
                     "id": "b67f8564-dc45-4127-bcd7-bc3d4d7c77ea",
                     "path": "2DVector(mode=2)",
@@ -180,7 +158,7 @@
                 {
                     "name": "up",
                     "id": "6b525de8-4c6a-4c2d-8324-33e1d4ed545d",
-                    "path": "<DualSenseGamepadHID>/rightStick/up",
+                    "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -191,7 +169,7 @@
                 {
                     "name": "down",
                     "id": "e9bfa5e7-828e-46e0-8ed0-973b83700e88",
-                    "path": "<DualSenseGamepadHID>/rightStick/down",
+                    "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -202,7 +180,7 @@
                 {
                     "name": "left",
                     "id": "4e4f1248-4b8f-46d7-88ce-256e3c8be09d",
-                    "path": "<DualSenseGamepadHID>/rightStick/left",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -213,7 +191,7 @@
                 {
                     "name": "right",
                     "id": "2bf63402-e4bf-40b2-9893-3f3c29628de0",
-                    "path": "<DualSenseGamepadHID>/rightStick/right",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -244,6 +222,24 @@
                     "id": "84ad729b-d094-45c0-b3ba-90239efef64c",
                     "expectedControlType": "",
                     "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "00d75010-64fa-4be7-a890-b3b5c41b4a85",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "6319f24d-229a-47fc-aab2-1860a17a0b51",
+                    "expectedControlType": "",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -252,7 +248,7 @@
                 {
                     "name": "",
                     "id": "260fdc5b-c5f4-463e-a162-a1252a15108a",
-                    "path": "<DualSenseGamepadHID>/buttonEast",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -268,6 +264,89 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5635a536-3dda-46c5-9e25-692d5dd0d1a0",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17e4f8ba-dbb0-4130-95b1-34943cb00530",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4225c4e3-f28e-4e60-92f9-e2091c4c708f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10f954bc-e337-4872-bf70-c1f97004e724",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "226d2d79-b43c-4e69-b7e5-ee98e4680407",
+            "actions": [
+                {
+                    "name": "X",
+                    "type": "Button",
+                    "id": "54c2848b-6c35-40dd-9cf5-f0fb8d069b7c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bd2d9bb9-7bb3-47fb-b7fc-947cf52bed4e",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33a169e2-14eb-4c09-a662-98dfe28ac074",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
