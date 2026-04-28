@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +6,14 @@ namespace MySoulsProject
 {
     public class PlayerManager : CharacterManager
     {
+        [Header("DEBUG MENU")]
+        [SerializeField] bool respawnCharacter = false;
+
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
         [HideInInspector] public PlayerStatsManager playerStatsManager;
+        [HideInInspector] public PlayerInventoryManager playerInventoryManager;
 
         protected override void Awake()
         {
@@ -22,6 +25,7 @@ namespace MySoulsProject
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             playerNetworkManager = GetComponent<PlayerNetworkManager>();
             playerStatsManager = GetComponent<PlayerStatsManager>();
+            playerInventoryManager = GetComponent<PlayerInventoryManager>();
         }
 
         protected override void Update()
@@ -37,6 +41,8 @@ namespace MySoulsProject
 
             //  REGEN STAMINA
             playerStatsManager.RegenerateStamina();
+
+            DebugMenu();
         }
 
         protected override void LateUpdate()
@@ -68,6 +74,35 @@ namespace MySoulsProject
                 playerNetworkManager.currentHealth.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewHealthValue;
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
+            }
+
+            playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+        }
+
+        public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+        {
+            if (IsOwner)
+            {
+                PlayerUIManager.Singleton.playerUIPopUpManager.SendYouDiedPopUp();
+            }
+
+            return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+
+            //  CHECK FOR PLAYERS THAT ARE ALIVE, IF 0 RESPAWN CHARACTERS
+        }
+
+        public override void ReviveCharacter()
+        {
+            base.ReviveCharacter();
+
+            if (IsOwner)
+            {
+                playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+                playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+                //  RESTORE FOCUS POINTS
+
+                //  PLAY REBIRTH EFFECTS
+                playerAnimatorManager.PlayTargetActionAnimation("Empty", false);
             }
         }
 
@@ -102,6 +137,16 @@ namespace MySoulsProject
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+        }
+
+        //  DEBUG DELETE LATER
+        private void DebugMenu()
+        {
+            if (respawnCharacter)
+            {
+                respawnCharacter = false;
+                ReviveCharacter();
+            }
         }
     }
 }

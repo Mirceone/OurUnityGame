@@ -194,7 +194,7 @@ namespace MySoulsProject
 
         public void SelectCurrentSlot()
         {
-            TitleScreenManager.Instance.SelectCharacterSlot(characterSlot);
+            TitleScreenManager.Singleton.SelectCharacterSlot(characterSlot);
         }
     }
 }

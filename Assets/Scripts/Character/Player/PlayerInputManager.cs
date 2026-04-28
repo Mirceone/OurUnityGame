@@ -1,7 +1,5 @@
-using System;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace MySoulsProject
 {

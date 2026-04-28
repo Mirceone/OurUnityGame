@@ -240,12 +240,15 @@ namespace MySoulsProject
             }
 
             //  IF THERE ARE NO FREE SLOTS, NOTIFY THE PLAYER
-            TitleScreenManager.Instance.DisplayNoFreeCharacterSlotsPopUp();
+            TitleScreenManager.Singleton.DisplayNoFreeCharacterSlotsPopUp();
         }
 
         private void NewGame()
         {
             //  SAVES THE NEWLY CREATED CHARACTERS STATS, AND ITEMS (WHEN CREATION SCREEN IS ADDED)
+            player.playerNetworkManager.vitality.Value = 15;
+            player.playerNetworkManager.endurance.Value = 10;
+
             SaveGame();
             StartCoroutine(LoadWorldScene());
         }

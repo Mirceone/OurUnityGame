@@ -6,7 +6,7 @@ namespace MySoulsProject
 {
     public class TitleScreenManager : MonoBehaviour
     {
-        public static TitleScreenManager Instance;
+        public static TitleScreenManager Singleton;
 
         [Header("Menus")]
         [SerializeField] GameObject titleScreenMainMenu;
@@ -28,9 +28,9 @@ namespace MySoulsProject
 
         private void Awake()
         {
-            if (Instance == null)
+            if (Singleton == null)
             {
-                Instance = this;
+                Singleton = this;
             }
             else
             {

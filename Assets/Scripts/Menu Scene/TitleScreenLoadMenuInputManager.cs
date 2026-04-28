@@ -14,7 +14,7 @@ namespace MySoulsProject
             if (deleteCharacterSlot)
             {
                 deleteCharacterSlot = false;
-                TitleScreenManager.Instance.AttemptToDeleteCharacterSlot();
+                TitleScreenManager.Singleton.AttemptToDeleteCharacterSlot();
             }
         }
 
