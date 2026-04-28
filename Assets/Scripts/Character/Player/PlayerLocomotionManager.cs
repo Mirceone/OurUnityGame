@@ -81,6 +81,10 @@ namespace MySoulsProject
             if (!player.canMove)
                 return;
 
+            //  Walk/run/sprint only when grounded; air control uses HandleJumpingMovement / HandleFreeFallMovement.
+            if (!player.isGrounded)
+                return;
+
             GetMovementValues();
             //  OUR MOVE DIRECTION IS BASED ON OUR CAMERAS FACING PERSPECTIVE & OUR MOVEMENT INPUTS
             moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
@@ -227,7 +231,8 @@ namespace MySoulsProject
                 return;
 
             //  IF WE ARE TWO HANDING OUR WEAPON, PLAY THE TWO HANDED JUMP ANIMATION, OTHERWISE PLAY THE ONE HANDED ANIMATION ( TO DO )
-            player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
+            //  Allow move/rotate while jump/land plays; grounded movement is still gated on isGrounded above.
+            player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false, true, true, true);
 
             player.isJumping = true;
 

@@ -60,13 +60,14 @@ namespace MySoulsProject
                 PlayerInputManager.Singleton.player = this;
                 WorldSaveGameManager.Singleton.player = this;
 
+                //  UPDATE THE TOTAL AMOUNT OF HEALTH OR STAMINA WHEN THE STAT LINKED TO EITHER CHANGES
+                playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
+                playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
+
+                //  UPDATES UI STAT BARS WHEN A STAT CHANGES (HEALTH OR STAMINA)
+                playerNetworkManager.currentHealth.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewHealthValue;
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
-
-                //  THIS WILL BE MOVED WHEN SAVING AND LOADING IS ADDED
-                playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
-                playerNetworkManager.currentStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
-                PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
             }
         }
 
@@ -78,18 +79,29 @@ namespace MySoulsProject
             currentCharacterData.xPosition = transform.position.x;
             currentCharacterData.yPosition = transform.position.y;
             currentCharacterData.zPosition = transform.position.z;
+
+            currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
+            currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
+
+            currentCharacterData.vitality = playerNetworkManager.vitality.Value;
+            currentCharacterData.endurance = playerNetworkManager.endurance.Value;
         }
 
         public void LoadGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
             playerNetworkManager.characterName.Value = currentCharacterData.characterName;
             Vector3 myPosition = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
-            
-            //  For some reason, disabling and re-enabling the character controller saves the XYZ values accordingly 
-            //  Do not change, it will break ;)
-            characterController.enabled = false;
             transform.position = myPosition;
-            characterController.enabled = true;
+
+            playerNetworkManager.vitality.Value = currentCharacterData.vitality;
+            playerNetworkManager.endurance.Value = currentCharacterData.endurance;
+
+            //  THIS WILL BE MOVED WHEN SAVING AND LOADING IS ADDED
+            playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vitality.Value);
+            playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+            playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
+            playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
         }
     }
 }
