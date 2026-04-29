@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enums : MonoBehaviour
 {
-    
+
 }
 
 public enum CharacterSlot
@@ -27,4 +29,14 @@ public enum WeaponModelSlot
     //Right Hips
     //Left Hips
     //Back
+}
+
+//  THIS IS USED TO CALCULATE DAMAGE BASED ON ATTACK TYPE
+public enum AttackType
+{
+    LightAttack01,
+    LightAttack02,
+    HeavyAttack01,
+    ChargedAttack01,
+    ChargedAttack02
 }

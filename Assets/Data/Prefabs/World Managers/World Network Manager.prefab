@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1372942292402810269}
   - component: {fileID: 3647865408759391664}
   - component: {fileID: 7757438263342798675}
+  - component: {fileID: 616128787899806954}
   m_Layer: 0
   m_Name: World Network Manager
   m_TagString: Untagged
@@ -105,3 +106,16 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
+--- !u!114 &616128787899806954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762579271433322656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4c75ec20c341be85cbb513be06fdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MySoulsProject.WorldGameSessionManager
+  players: []

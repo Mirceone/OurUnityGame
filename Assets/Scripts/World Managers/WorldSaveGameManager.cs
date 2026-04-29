@@ -6,7 +6,7 @@ namespace MySoulsProject
 {
     public class WorldSaveGameManager : MonoBehaviour
     {
-        public static WorldSaveGameManager Singleton;
+        public static WorldSaveGameManager instance;
 
         public PlayerManager player;
 
@@ -40,9 +40,9 @@ namespace MySoulsProject
         private void Awake()
         {
             //  THERE CAN ONLY BE ONE INSTANCE OF THIS SCRIPT AT ONE TIME, IF ANOTHER EXISTS, DESTROY IT
-            if (Singleton == null)
+            if (instance == null)
             {
-                Singleton = this;
+                instance = this;
             }
             else
             {
@@ -240,7 +240,7 @@ namespace MySoulsProject
             }
 
             //  IF THERE ARE NO FREE SLOTS, NOTIFY THE PLAYER
-            TitleScreenManager.Singleton.DisplayNoFreeCharacterSlotsPopUp();
+            TitleScreenManager.instance.DisplayNoFreeCharacterSlotsPopUp();
         }
 
         private void NewGame()

@@ -16,6 +16,9 @@ namespace MySoulsProject
         protected bool fallingVelocityHAsBeenSet = false;
         [SerializeField] protected float inAirTimer = 0;
 
+        [Header("Flags")]
+        public bool isRolling = false;
+
 
         protected virtual void Awake()
         {
@@ -39,7 +42,7 @@ namespace MySoulsProject
             else
             {
                 //  IF WE ARE NOT JUMPING, AND OUR FALLING VELOCITY HAS NOT BEEN SET
-                if (!character.isJumping && !fallingVelocityHAsBeenSet)
+                if (!character.characterNetworkManager.isJumping.Value && !fallingVelocityHAsBeenSet)
                 {
                     fallingVelocityHAsBeenSet = true;
                     yVelocity.y = fallStartYVelocity;
@@ -63,7 +66,7 @@ namespace MySoulsProject
         //  DRAWS OUR GROUND CHECK SPHERE IN SCENE VIEW
         protected void OnDrawGizmosSelected()
         {
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+            //Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MySoulsProject
             if (deleteCharacterSlot)
             {
                 deleteCharacterSlot = false;
-                TitleScreenManager.Singleton.AttemptToDeleteCharacterSlot();
+                TitleScreenManager.instance.AttemptToDeleteCharacterSlot();
             }
         }
 
@@ -23,7 +23,7 @@ namespace MySoulsProject
             if (playerControls == null)
             {
                 playerControls = new PlayerControls();
-                playerControls.UI.X.performed += i => deleteCharacterSlot = true;
+                playerControls.UI.Square.performed += i => deleteCharacterSlot = true;
             }
 
             playerControls.Enable();

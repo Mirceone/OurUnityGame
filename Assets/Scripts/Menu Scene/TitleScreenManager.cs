@@ -6,7 +6,7 @@ namespace MySoulsProject
 {
     public class TitleScreenManager : MonoBehaviour
     {
-        public static TitleScreenManager Singleton;
+        public static TitleScreenManager instance;
 
         [Header("Menus")]
         [SerializeField] GameObject titleScreenMainMenu;
@@ -28,9 +28,9 @@ namespace MySoulsProject
 
         private void Awake()
         {
-            if (Singleton == null)
+            if (instance == null)
             {
-                Singleton = this;
+                instance = this;
             }
             else
             {
@@ -45,7 +45,7 @@ namespace MySoulsProject
 
         public void StartNewGame()
         {
-            WorldSaveGameManager.Singleton.AttemptToCreateNewGame();
+            WorldSaveGameManager.instance.AttemptToCreateNewGame();
         }
 
         public void OpenLoadGameMenu()
@@ -108,7 +108,7 @@ namespace MySoulsProject
         public void DeleteCharacterSlot()
         {
             deleteCharacterSlotPopUp.SetActive(false);
-            WorldSaveGameManager.Singleton.DeleteGame(currentSelectedSlot);
+            WorldSaveGameManager.instance.DeleteGame(currentSelectedSlot);
 
             //  WE DISABLE AND THEN ENABLE THE LOAD MENU, TO REFRESH THE SLOTS (The deleted slots will now become inactive)
             titleScreenLoadMenu.SetActive(false);

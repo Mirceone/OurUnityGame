@@ -6,7 +6,10 @@ namespace MySoulsProject
 {
     public class WorldCharacterEffectsManager : MonoBehaviour
     {
-        public static WorldCharacterEffectsManager Singleton;
+        public static WorldCharacterEffectsManager instance;
+
+        [Header("VFX")]
+        public GameObject bloodSplatterVFX;
 
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;
@@ -15,9 +18,9 @@ namespace MySoulsProject
 
         private void Awake()
         {
-            if (Singleton == null)
+            if (instance == null)
             {
-                Singleton = this;
+                instance = this;
             }
             else
             {

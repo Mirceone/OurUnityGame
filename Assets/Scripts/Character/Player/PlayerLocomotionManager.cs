@@ -54,9 +54,15 @@ namespace MySoulsProject
                 moveAmount = player.characterNetworkManager.moveAmount.Value;
 
                 //  IF NOT LOCKED ON, PASS MOVE AMOUNT
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
-
+                if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+                {
+                    player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+                }
                 //  IF LOCKED ON, PASS HORZ AND VERT
+                else
+                {
+                    player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalMovement, verticalMovement, player.playerNetworkManager.isSprinting.Value);
+                }
             }
         }
 
@@ -70,9 +76,9 @@ namespace MySoulsProject
 
         private void GetMovementValues()
         {
-            verticalMovement = PlayerInputManager.Singleton.verticalInput;
-            horizontalMovement = PlayerInputManager.Singleton.horizontalInput;
-            moveAmount = PlayerInputManager.Singleton.moveAmount;
+            verticalMovement = PlayerInputManager.instance.vertical_Input;
+            horizontalMovement = PlayerInputManager.instance.horizontal_Input;
+            moveAmount = PlayerInputManager.instance.moveAmount;
             //  CLAMP THE MOVEMENTS
         }
 
@@ -81,14 +87,10 @@ namespace MySoulsProject
             if (!player.canMove)
                 return;
 
-            //  Walk/run/sprint only when grounded; air control uses HandleJumpingMovement / HandleFreeFallMovement.
-            if (!player.isGrounded)
-                return;
-
             GetMovementValues();
             //  OUR MOVE DIRECTION IS BASED ON OUR CAMERAS FACING PERSPECTIVE & OUR MOVEMENT INPUTS
-            moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
-            moveDirection = moveDirection + PlayerCamera.Singleton.transform.right * horizontalMovement;
+            moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
+            moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
             moveDirection.Normalize();
             moveDirection.y = 0;
 
@@ -98,11 +100,11 @@ namespace MySoulsProject
             }
             else
             {
-                if (PlayerInputManager.Singleton.moveAmount > 0.5f)
+                if (PlayerInputManager.instance.moveAmount > 0.5f)
                 {
                     player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
                 }
-                else if (PlayerInputManager.Singleton.moveAmount <= 0.5f)
+                else if (PlayerInputManager.instance.moveAmount <= 0.5f)
                 {
                     player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
                 }
@@ -111,7 +113,7 @@ namespace MySoulsProject
 
         private void HandleJumpingMovement()
         {
-            if (player.isJumping)
+            if (player.playerNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
             }
@@ -123,8 +125,8 @@ namespace MySoulsProject
             {
                 Vector3 freeFallDirection;
 
-                freeFallDirection = PlayerCamera.Singleton.transform.forward * PlayerInputManager.Singleton.verticalInput;
-                freeFallDirection = freeFallDirection + PlayerCamera.Singleton.transform.right * PlayerInputManager.Singleton.horizontalInput;
+                freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.vertical_Input;
+                freeFallDirection = freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontal_Input;
                 freeFallDirection.y = 0;
 
                 player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
@@ -133,23 +135,61 @@ namespace MySoulsProject
 
         private void HandleRotation()
         {
+            if (player.isDead.Value)
+                return;
+
             if (!player.canRotate)
                 return;
 
-            targetRotationDirection = Vector3.zero;
-            targetRotationDirection = PlayerCamera.Singleton.cameraObject.transform.forward * verticalMovement;
-            targetRotationDirection = targetRotationDirection + PlayerCamera.Singleton.cameraObject.transform.right * horizontalMovement;
-            targetRotationDirection.Normalize();
-            targetRotationDirection.y = 0;
-
-            if (targetRotationDirection == Vector3.zero)
+            if (player.playerNetworkManager.isLockedOn.Value)
             {
-                targetRotationDirection = transform.forward;
-            }
+                if (player.playerNetworkManager.isSprinting.Value || player.playerLocomotionManager.isRolling)
+                {
+                    Vector3 targetDirection = Vector3.zero;
+                    targetDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
+                    targetDirection += PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
+                    targetDirection.Normalize();
+                    targetDirection.y = 0;
 
-            Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
-            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
-            transform.rotation = targetRotation;
+                    if (targetDirection == Vector3.zero)
+                        targetDirection = transform.forward;
+
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                    Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = finalRotation;
+                }
+                else
+                {
+                    if (player.playerCombatManager.currentTarget == null)
+                        return;
+
+                    Vector3 targetDirection;
+                    targetDirection = player.playerCombatManager.currentTarget.transform.position - transform.position;
+                    targetDirection.y = 0;
+                    targetDirection.Normalize();
+
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                    Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = finalRotation;
+                }
+            }
+            else
+            {
+                targetRotationDirection = Vector3.zero;
+                targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
+                targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
+                targetRotationDirection.Normalize();
+                targetRotationDirection.y = 0;
+
+                if (targetRotationDirection == Vector3.zero)
+                {
+                    targetRotationDirection = transform.forward;
+                }
+
+                Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = targetRotation;
+            }
         }
 
         public void HandleSprinting()
@@ -191,10 +231,10 @@ namespace MySoulsProject
                 return;
 
             //  IF WE ARE MOVING WHEN WE ATTEMPT TO DODGE, WE PERFORM A ROLL
-            if (PlayerInputManager.Singleton.moveAmount > 0)
+            if (PlayerInputManager.instance.moveAmount > 0)
             {
-                rollDirection = PlayerCamera.Singleton.cameraObject.transform.forward * PlayerInputManager.Singleton.verticalInput;
-                rollDirection += PlayerCamera.Singleton.cameraObject.transform.right * PlayerInputManager.Singleton.horizontalInput;
+                rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.vertical_Input;
+                rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontal_Input;
                 rollDirection.y = 0;
                 rollDirection.Normalize();
 
@@ -202,6 +242,7 @@ namespace MySoulsProject
                 player.transform.rotation = playerRotation;
 
                 player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true, true);
+                player.playerLocomotionManager.isRolling = true;
             }
             //  IF WE ARE STATIONARY, WE PERFORM A BACKSTEP
             else
@@ -223,7 +264,7 @@ namespace MySoulsProject
                 return;
 
             //  IF WE ARE ALREADY IN A JUMP, WE DO NOT WANT TO ALLOW A JUMP AGAIN UNTIL THE CURRENT JUMP HAS FINISHED
-            if (player.isJumping)
+            if (player.playerNetworkManager.isJumping.Value)
                 return;
 
             //  IF WE ARE NOT GROUNDED, WE DO NOT WANT TO ALLOW A JUMP
@@ -231,15 +272,14 @@ namespace MySoulsProject
                 return;
 
             //  IF WE ARE TWO HANDING OUR WEAPON, PLAY THE TWO HANDED JUMP ANIMATION, OTHERWISE PLAY THE ONE HANDED ANIMATION ( TO DO )
-            //  Allow move/rotate while jump/land plays; grounded movement is still gated on isGrounded above.
-            player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false, true, true, true);
+            player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
 
-            player.isJumping = true;
+            player.playerNetworkManager.isJumping.Value = true;
 
             player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 
-            jumpDirection = PlayerCamera.Singleton.cameraObject.transform.forward * PlayerInputManager.Singleton.verticalInput;
-            jumpDirection += PlayerCamera.Singleton.cameraObject.transform.right * PlayerInputManager.Singleton.horizontalInput;
+            jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.vertical_Input;
+            jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontal_Input;
             jumpDirection.y = 0;
 
             if (jumpDirection != Vector3.zero)
@@ -250,12 +290,12 @@ namespace MySoulsProject
                     jumpDirection *= 1;
                 }
                 //  IF WE ARE RUNNING, JUMP DIRECTION IS AT HALF DISTANCE
-                else if (PlayerInputManager.Singleton.moveAmount > 0.5)
+                else if (PlayerInputManager.instance.moveAmount > 0.5)
                 {
                     jumpDirection *= 0.5f;
                 }
                 //  IF WE ARE WALKING, JUMP DIRECTION IS AT QUARTER DISTANCE
-                else if (PlayerInputManager.Singleton.moveAmount <= 0.5)
+                else if (PlayerInputManager.instance.moveAmount <= 0.5)
                 {
                     jumpDirection *= 0.25f;
                 }

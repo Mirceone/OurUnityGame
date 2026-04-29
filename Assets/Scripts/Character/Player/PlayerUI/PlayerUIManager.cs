@@ -5,7 +5,7 @@ namespace MySoulsProject
 {
     public class PlayerUIManager : MonoBehaviour
     {
-        public static PlayerUIManager Singleton;
+        public static PlayerUIManager instance;
 
         [Header("NETWORK JOIN")]
         [SerializeField] bool startGameAsClient;
@@ -15,9 +15,9 @@ namespace MySoulsProject
 
         private void Awake()
         {
-            if (Singleton == null)
+            if (instance == null)
             {
-                Singleton = this;
+                instance = this;
             }
             else
             {

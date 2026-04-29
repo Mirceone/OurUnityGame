@@ -4,16 +4,19 @@ namespace MySoulsProject
 {
     public class WorldSoundFXManager : MonoBehaviour
     {
-        public static WorldSoundFXManager Singleton;
+        public static WorldSoundFXManager instance;
+
+        [Header("Damage Sounds")]
+        public AudioClip[] physicalDamageSFX;
 
         [Header("Action Sounds")]
         public AudioClip rollSFX;
 
         private void Awake()
         {
-            if (Singleton == null)
+            if (instance == null)
             {
-                Singleton = this;
+                instance = this;
             }
             else
             {
@@ -24,6 +27,13 @@ namespace MySoulsProject
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+        }
+
+        public AudioClip ChooseRandomSFXFromArray(AudioClip[] array)
+        {
+            int index = Random.Range(0, array.Length);
+
+            return array[index];
         }
     }
 }
