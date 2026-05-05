@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1630869993
+  GlobalObjectIdHash: 4128484592
   InScenePlacedSourceGlobalObjectIdHash: 1630869993
   DeferredDespawnTick: 0
   Ownership: 1
@@ -532,13 +532,13 @@ MonoBehaviour:
   isChargingAttack:
     m_InternalValue: 0
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 200
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 200
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 100
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 100
   vitality:
     m_InternalValue: 1
   endurance:

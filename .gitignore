@@ -12,7 +12,7 @@
 [Uu]ser[Ss]ettings/
 [Ll]ayouts/
 *.log
-
+Merged_SourceArchive/
 # Unity auto-generated user/editor settings at project root
 EditorUserSettings.asset
 EditorUserSettings.asset.meta
