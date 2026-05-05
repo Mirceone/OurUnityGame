@@ -1,8 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
-    
     public class PlayerStatsManager : CharacterStatsManager
     {
         PlayerManager player;
@@ -25,6 +26,4 @@ namespace MySoulsProject
             CalculateStaminaBasedOnEnduranceLevel(player.playerNetworkManager.endurance.Value);
         }
     }
-    
 }
-

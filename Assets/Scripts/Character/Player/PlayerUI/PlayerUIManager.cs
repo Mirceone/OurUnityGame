@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class PlayerUIManager : MonoBehaviour
     {

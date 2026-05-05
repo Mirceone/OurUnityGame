@@ -1,7 +1,9 @@
-using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class PlayerInputManager : MonoBehaviour
     {
@@ -35,13 +37,15 @@ namespace MySoulsProject
         [SerializeField] bool dodge_Input = false;
         [SerializeField] bool sprint_Input = false;
         [SerializeField] bool jump_Input = false;
+        [SerializeField] bool switch_Right_Weapon_Input = false;
+        [SerializeField] bool switch_Left_Weapon_Input = false;
 
         [Header("BUMPER INPUTS")]
         [SerializeField] bool RB_Input = false;
 
         [Header("TRIGGER INPUTS")]
-        [SerializeField] bool R2_Input = false;
-        [SerializeField] bool Hold_R2_Input = false;
+        [SerializeField] bool RT_Input = false;
+        [SerializeField] bool Hold_RT_Input = false;
 
 
         private void Awake()
@@ -104,16 +108,20 @@ namespace MySoulsProject
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => camera_Input = i.ReadValue<Vector2>();
+
+                //  ACTIONS
                 playerControls.PlayerActions.Dodge.performed += i => dodge_Input = true;
                 playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
+                playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
+                playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
 
                 //  BUMPERS
-                playerControls.PlayerActions.R1.performed += i => RB_Input = true;
+                playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
                 //  TRIGGERS
-                playerControls.PlayerActions.R2.performed += i => R2_Input = true;
-                playerControls.PlayerActions.HoldR2.performed += i => Hold_R2_Input = true;
-                playerControls.PlayerActions.HoldR2.canceled += i => Hold_R2_Input = false;
+                playerControls.PlayerActions.RT.performed += i => RT_Input = true;
+                playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
+                playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
 
                 //  LOCK ON
                 playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
@@ -166,8 +174,10 @@ namespace MySoulsProject
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
-            HandleR2Input();
-            HandleChargeR2Input();
+            HandleRTInput();
+            HandleChargeRTInput();
+            HandleSwitchRightWeaponInput();
+            HandleSwitchLeftWeaponInput();
         }
 
         //  LOCK ON
@@ -186,7 +196,7 @@ namespace MySoulsProject
 
                 //  ATTEMPT TO FIND NEW TARGET
 
-                //  THIS ASSURES US THAT THE COROUTINE NEVER RUNS MUILTPILE TIMES OVERLAPPING ITSELF
+                //  THIS ASSURES US THAT THE COROUTINE NEVER RUNS MUILTPLE TIMES OVERLAPPING ITSELF
                 if (lockOnCoroutine != null)
                     StopCoroutine(lockOnCoroutine);
 
@@ -259,7 +269,7 @@ namespace MySoulsProject
             vertical_Input = movementInput.y;
             horizontal_Input = movementInput.x;
 
-            //  RETURNS THE ABSOLUTE NUMBER, (Meaning number without the negative sign, so it's always positive)
+            //  RETURNS THE ABSOLUTE NUMBER, (Meaning number without the negative sign, so its always positive)
             moveAmount = Mathf.Clamp01(Mathf.Abs(vertical_Input) + Mathf.Abs(horizontal_Input));
 
             //  WE CLAMP THE VALUES, SO THEY ARE 0, 0.5 OR 1 (OPTIONAL)
@@ -277,6 +287,15 @@ namespace MySoulsProject
 
             if (player == null)
                 return;
+
+            if (moveAmount != 0)
+            {
+                player.playerNetworkManager.isMoving.Value = true;
+            }
+            else
+            {
+                player.playerNetworkManager.isMoving.Value = false;
+            }
 
             //  IF WE ARE NOT LOCKED ON, ONLY USE THE MOVE AMOUNT
 
@@ -353,11 +372,11 @@ namespace MySoulsProject
             }
         }
 
-        private void HandleR2Input()
+        private void HandleRTInput()
         {
-            if (R2_Input)
+            if (RT_Input)
             {
-                R2_Input = false;
+                RT_Input = false;
 
                 //  TODO: IF WE HAVE A UI WINDOW OPEN, RETURN AND DO NOTHING
 
@@ -369,15 +388,33 @@ namespace MySoulsProject
             }
         }
 
-        private void HandleChargeR2Input()
+        private void HandleChargeRTInput()
         {
             //  WE ONLY WANT TO CHECK FOR A CHARGE IF WE ARE IN AN ACTION THAT REQUIRES IT (Attacking)
             if (player.isPerformingAction)
             {
                 if (player.playerNetworkManager.isUsingRightHand.Value)
                 {
-                    player.playerNetworkManager.isChargingAttack.Value = Hold_R2_Input;
+                    player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
                 }
+            }
+        }
+
+        private void HandleSwitchRightWeaponInput()
+        {
+            if (switch_Right_Weapon_Input)
+            {
+                switch_Right_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchRightWeapon();
+            }
+        }
+
+        private void HandleSwitchLeftWeaponInput()
+        {
+            if (switch_Left_Weapon_Input)
+            {
+                switch_Left_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }

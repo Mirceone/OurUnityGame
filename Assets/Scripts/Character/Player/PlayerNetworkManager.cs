@@ -1,9 +1,10 @@
-using Unity.Collections;
-using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
+using Unity.Collections;
 
-
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class PlayerNetworkManager : CharacterNetworkManager
     {
@@ -58,6 +59,11 @@ namespace MySoulsProject
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(newID));
             player.playerInventoryManager.currentRightHandWeapon = newWeapon;
             player.playerEquipmentManager.LoadRightWeapon();
+
+            if (player.IsOwner)
+            {
+                PlayerUIManager.instance.playerUIHudManager.SetRightWeaponQuickSlotIcon(newID);
+            }
         }
 
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
@@ -65,6 +71,11 @@ namespace MySoulsProject
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(newID));
             player.playerInventoryManager.currentLeftHandWeapon = newWeapon;
             player.playerEquipmentManager.LoadLeftWeapon();
+
+            if (player.IsOwner)
+            {
+                PlayerUIManager.instance.playerUIHudManager.SetLeftWeaponQuickSlotIcon(newID);
+            }
         }
 
         public void OnCurrentWeaponBeingUsedIDChange(int oldID, int newID)

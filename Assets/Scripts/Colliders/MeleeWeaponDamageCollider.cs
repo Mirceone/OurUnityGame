@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class MeleeWeaponDamageCollider : DamageCollider
     {
@@ -11,8 +11,11 @@ namespace MySoulsProject
 
         [Header("Weapon Attack Modifiers")]
         public float light_Attack_01_Modifier;
+        public float light_Attack_02_Modifier;
         public float heavy_Attack_01_Modifier;
+        public float heavy_Attack_02_Modifier;
         public float charge_Attack_01_Modifier;
+        public float charge_Attack_02_Modifier;
 
         protected override void Awake()
         {
@@ -42,7 +45,6 @@ namespace MySoulsProject
 
                 //  CHECK IF TARGET IS BLOCKING
 
-                //  CHECK IF TARGET IS INVULNERABLE
 
                 DamageTarget(damageTarget);
             }
@@ -70,11 +72,20 @@ namespace MySoulsProject
                 case AttackType.LightAttack01:
                     ApplyAttackDamageModifiers(light_Attack_01_Modifier, damageEffect);
                     break;
+                case AttackType.LightAttack02:
+                    ApplyAttackDamageModifiers(light_Attack_02_Modifier, damageEffect);
+                    break;
                 case AttackType.HeavyAttack01:
                     ApplyAttackDamageModifiers(heavy_Attack_01_Modifier, damageEffect);
                     break;
+                case AttackType.HeavyAttack02:
+                    ApplyAttackDamageModifiers(heavy_Attack_02_Modifier, damageEffect);
+                    break;
                 case AttackType.ChargedAttack01:
                     ApplyAttackDamageModifiers(charge_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.ChargedAttack02:
+                    ApplyAttackDamageModifiers(charge_Attack_02_Modifier, damageEffect);
                     break;
                 default:
                     break;

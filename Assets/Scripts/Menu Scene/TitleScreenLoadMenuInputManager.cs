@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class TitleScreenLoadMenuInputManager : MonoBehaviour
     {
@@ -14,7 +16,7 @@ namespace MySoulsProject
             if (deleteCharacterSlot)
             {
                 deleteCharacterSlot = false;
-                TitleScreenManager.instance.AttemptToDeleteCharacterSlot();
+                TitleScreenManager.Instance.AttemptToDeleteCharacterSlot();
             }
         }
 
@@ -23,7 +25,7 @@ namespace MySoulsProject
             if (playerControls == null)
             {
                 playerControls = new PlayerControls();
-                playerControls.UI.Square.performed += i => deleteCharacterSlot = true;
+                playerControls.UI.X.performed += i => deleteCharacterSlot = true;
             }
 
             playerControls.Enable();

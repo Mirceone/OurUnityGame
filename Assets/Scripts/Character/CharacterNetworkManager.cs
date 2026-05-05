@@ -1,11 +1,16 @@
-using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class CharacterNetworkManager : NetworkBehaviour
     {
         CharacterManager character;
+
+        [Header("Active")]
+        public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Position")]
         public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -15,6 +20,7 @@ namespace MySoulsProject
         public float networkRotationSmoothTime = 0.1f;
 
         [Header("Animator")]
+        public NetworkVariable<bool> isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> horizontalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> verticalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> moveAmount = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -23,6 +29,7 @@ namespace MySoulsProject
         public NetworkVariable<ulong> currentTargetNetworkObjectID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Flags")]
+        public NetworkVariable<bool> isInvulnerable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -43,7 +50,7 @@ namespace MySoulsProject
             character = GetComponent<CharacterManager>();
         }
 
-        public void CheckHP(int oldValue, int newValue)
+        public virtual void CheckHP(int oldValue, int newValue)
         {
             if (currentHealth.Value <= 0)
             {
@@ -81,6 +88,16 @@ namespace MySoulsProject
             character.animator.SetBool("isChargingAttack", isChargingAttack.Value);
         }
 
+        public void OnIsMovingChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isMoving", isMoving.Value);
+        }
+
+        public virtual void OnIsActiveChanged(bool oldStatus, bool newStatus)
+        {
+            gameObject.SetActive(isActive.Value);
+        }
+
         //  A SERVER RPC IS A FUNCTION CALLED FROM A CLIENT, TO THE SERVER (IN OUR CASE THE HOST)
         [ServerRpc]
         public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
@@ -105,7 +122,7 @@ namespace MySoulsProject
 
         private void PerformActionAnimationFromServer(string animationID, bool applyRootMotion)
         {
-            character.applyRootMotion = applyRootMotion;
+            character.characterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(animationID, 0.2f);
         }
 
@@ -133,7 +150,7 @@ namespace MySoulsProject
 
         private void PerformAttackActionAnimationFromServer(string animationID, bool applyRootMotion)
         {
-            character.applyRootMotion = applyRootMotion;
+            character.characterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(animationID, 0.2f);
         }
 
@@ -203,5 +220,4 @@ namespace MySoulsProject
             damagedCharacter.characterEffectsManager.ProcessInstantEffect(damageEffect);
         }
     }
-
 }

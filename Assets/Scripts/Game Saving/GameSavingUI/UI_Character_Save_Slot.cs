@@ -1,7 +1,9 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class UI_Character_Save_Slot : MonoBehaviour
     {
@@ -194,7 +196,7 @@ namespace MySoulsProject
 
         public void SelectCurrentSlot()
         {
-            TitleScreenManager.instance.SelectCharacterSlot(characterSlot);
+            TitleScreenManager.Instance.SelectCharacterSlot(characterSlot);
         }
     }
 }

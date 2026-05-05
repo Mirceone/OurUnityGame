@@ -247,7 +247,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""R1"",
+                    ""name"": ""RB"",
                     ""type"": ""Button"",
                     ""id"": ""b46feb99-1dc8-4603-a1c0-b605342ddad7"",
                     ""expectedControlType"": """",
@@ -256,7 +256,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""R2"",
+                    ""name"": ""RT"",
                     ""type"": ""Button"",
                     ""id"": ""9459c0c5-046c-4c0d-82fd-6a4fa53be15f"",
                     ""expectedControlType"": """",
@@ -265,7 +265,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Hold R2"",
+                    ""name"": ""Hold RT"",
                     ""type"": ""PassThrough"",
                     ""id"": ""dd46084a-b6c5-4e51-be8a-02587060f5e4"",
                     ""expectedControlType"": ""Button"",
@@ -295,6 +295,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Seek Right Lock On Target"",
                     ""type"": ""Button"",
                     ""id"": ""0072248a-bf9e-415a-8a29-4ca472c8b283"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch Right Weapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8da2366-130d-40f8-87a8-8091211e73f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch Left Weapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""12933dfc-bdcc-4700-b7f6-5c140608ff92"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -375,7 +393,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""R1"",
+                    ""action"": ""RB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -386,7 +404,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""R1"",
+                    ""action"": ""RB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -397,7 +415,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""R2"",
+                    ""action"": ""RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -408,7 +426,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""R2"",
+                    ""action"": ""RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -419,7 +437,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Hold R2"",
+                    ""action"": ""Hold RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -430,7 +448,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Hold R2"",
+                    ""action"": ""Hold RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -475,6 +493,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Seek Right Lock On Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e59608e6-ebaf-4f42-aebe-8d65e0cc5912"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Right Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e848173b-8279-4810-a725-456ce68ccd1e"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Right Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94ffe6ab-b134-4602-a32f-a720a99877a7"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Left Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99bc0227-b17a-4ced-89e3-acb26192228f"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Left Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -568,7 +630,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""226d2d79-b43c-4e69-b7e5-ee98e4680407"",
             ""actions"": [
                 {
-                    ""name"": ""Square"",
+                    ""name"": ""X"",
                     ""type"": ""Button"",
                     ""id"": ""54c2848b-6c35-40dd-9cf5-f0fb8d069b7c"",
                     ""expectedControlType"": """",
@@ -585,7 +647,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Square"",
+                    ""action"": ""X"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -596,7 +658,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Square"",
+                    ""action"": ""X"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -613,18 +675,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_Dodge = m_PlayerActions.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerActions_R1 = m_PlayerActions.FindAction("R1", throwIfNotFound: true);
-        m_PlayerActions_R2 = m_PlayerActions.FindAction("R2", throwIfNotFound: true);
-        m_PlayerActions_HoldR2 = m_PlayerActions.FindAction("Hold R2", throwIfNotFound: true);
+        m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
+        m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
+        m_PlayerActions_HoldRT = m_PlayerActions.FindAction("Hold RT", throwIfNotFound: true);
         m_PlayerActions_LockOn = m_PlayerActions.FindAction("Lock On", throwIfNotFound: true);
         m_PlayerActions_SeekLeftLockOnTarget = m_PlayerActions.FindAction("Seek Left Lock On Target", throwIfNotFound: true);
         m_PlayerActions_SeekRightLockOnTarget = m_PlayerActions.FindAction("Seek Right Lock On Target", throwIfNotFound: true);
+        m_PlayerActions_SwitchRightWeapon = m_PlayerActions.FindAction("Switch Right Weapon", throwIfNotFound: true);
+        m_PlayerActions_SwitchLeftWeapon = m_PlayerActions.FindAction("Switch Left Weapon", throwIfNotFound: true);
         // Player Camera
         m_PlayerCamera = asset.FindActionMap("Player Camera", throwIfNotFound: true);
         m_PlayerCamera_Movement = m_PlayerCamera.FindAction("Movement", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Square = m_UI.FindAction("Square", throwIfNotFound: true);
+        m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -807,12 +871,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Dodge;
     private readonly InputAction m_PlayerActions_Sprint;
     private readonly InputAction m_PlayerActions_Jump;
-    private readonly InputAction m_PlayerActions_R1;
-    private readonly InputAction m_PlayerActions_R2;
-    private readonly InputAction m_PlayerActions_HoldR2;
+    private readonly InputAction m_PlayerActions_RB;
+    private readonly InputAction m_PlayerActions_RT;
+    private readonly InputAction m_PlayerActions_HoldRT;
     private readonly InputAction m_PlayerActions_LockOn;
     private readonly InputAction m_PlayerActions_SeekLeftLockOnTarget;
     private readonly InputAction m_PlayerActions_SeekRightLockOnTarget;
+    private readonly InputAction m_PlayerActions_SwitchRightWeapon;
+    private readonly InputAction m_PlayerActions_SwitchLeftWeapon;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player Actions".
     /// </summary>
@@ -837,17 +903,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActions/R1".
+        /// Provides access to the underlying input action "PlayerActions/RB".
         /// </summary>
-        public InputAction @R1 => m_Wrapper.m_PlayerActions_R1;
+        public InputAction @RB => m_Wrapper.m_PlayerActions_RB;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActions/R2".
+        /// Provides access to the underlying input action "PlayerActions/RT".
         /// </summary>
-        public InputAction @R2 => m_Wrapper.m_PlayerActions_R2;
+        public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActions/HoldR2".
+        /// Provides access to the underlying input action "PlayerActions/HoldRT".
         /// </summary>
-        public InputAction @HoldR2 => m_Wrapper.m_PlayerActions_HoldR2;
+        public InputAction @HoldRT => m_Wrapper.m_PlayerActions_HoldRT;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActions/LockOn".
         /// </summary>
@@ -860,6 +926,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/SeekRightLockOnTarget".
         /// </summary>
         public InputAction @SeekRightLockOnTarget => m_Wrapper.m_PlayerActions_SeekRightLockOnTarget;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/SwitchRightWeapon".
+        /// </summary>
+        public InputAction @SwitchRightWeapon => m_Wrapper.m_PlayerActions_SwitchRightWeapon;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/SwitchLeftWeapon".
+        /// </summary>
+        public InputAction @SwitchLeftWeapon => m_Wrapper.m_PlayerActions_SwitchLeftWeapon;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -895,15 +969,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @R1.started += instance.OnR1;
-            @R1.performed += instance.OnR1;
-            @R1.canceled += instance.OnR1;
-            @R2.started += instance.OnR2;
-            @R2.performed += instance.OnR2;
-            @R2.canceled += instance.OnR2;
-            @HoldR2.started += instance.OnHoldR2;
-            @HoldR2.performed += instance.OnHoldR2;
-            @HoldR2.canceled += instance.OnHoldR2;
+            @RB.started += instance.OnRB;
+            @RB.performed += instance.OnRB;
+            @RB.canceled += instance.OnRB;
+            @RT.started += instance.OnRT;
+            @RT.performed += instance.OnRT;
+            @RT.canceled += instance.OnRT;
+            @HoldRT.started += instance.OnHoldRT;
+            @HoldRT.performed += instance.OnHoldRT;
+            @HoldRT.canceled += instance.OnHoldRT;
             @LockOn.started += instance.OnLockOn;
             @LockOn.performed += instance.OnLockOn;
             @LockOn.canceled += instance.OnLockOn;
@@ -913,6 +987,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SeekRightLockOnTarget.started += instance.OnSeekRightLockOnTarget;
             @SeekRightLockOnTarget.performed += instance.OnSeekRightLockOnTarget;
             @SeekRightLockOnTarget.canceled += instance.OnSeekRightLockOnTarget;
+            @SwitchRightWeapon.started += instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.performed += instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.canceled += instance.OnSwitchRightWeapon;
+            @SwitchLeftWeapon.started += instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.performed += instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.canceled += instance.OnSwitchLeftWeapon;
         }
 
         /// <summary>
@@ -933,15 +1013,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @R1.started -= instance.OnR1;
-            @R1.performed -= instance.OnR1;
-            @R1.canceled -= instance.OnR1;
-            @R2.started -= instance.OnR2;
-            @R2.performed -= instance.OnR2;
-            @R2.canceled -= instance.OnR2;
-            @HoldR2.started -= instance.OnHoldR2;
-            @HoldR2.performed -= instance.OnHoldR2;
-            @HoldR2.canceled -= instance.OnHoldR2;
+            @RB.started -= instance.OnRB;
+            @RB.performed -= instance.OnRB;
+            @RB.canceled -= instance.OnRB;
+            @RT.started -= instance.OnRT;
+            @RT.performed -= instance.OnRT;
+            @RT.canceled -= instance.OnRT;
+            @HoldRT.started -= instance.OnHoldRT;
+            @HoldRT.performed -= instance.OnHoldRT;
+            @HoldRT.canceled -= instance.OnHoldRT;
             @LockOn.started -= instance.OnLockOn;
             @LockOn.performed -= instance.OnLockOn;
             @LockOn.canceled -= instance.OnLockOn;
@@ -951,6 +1031,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SeekRightLockOnTarget.started -= instance.OnSeekRightLockOnTarget;
             @SeekRightLockOnTarget.performed -= instance.OnSeekRightLockOnTarget;
             @SeekRightLockOnTarget.canceled -= instance.OnSeekRightLockOnTarget;
+            @SwitchRightWeapon.started -= instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.performed -= instance.OnSwitchRightWeapon;
+            @SwitchRightWeapon.canceled -= instance.OnSwitchRightWeapon;
+            @SwitchLeftWeapon.started -= instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.performed -= instance.OnSwitchLeftWeapon;
+            @SwitchLeftWeapon.canceled -= instance.OnSwitchLeftWeapon;
         }
 
         /// <summary>
@@ -1084,7 +1170,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Square;
+    private readonly InputAction m_UI_X;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1097,9 +1183,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UI/Square".
+        /// Provides access to the underlying input action "UI/X".
         /// </summary>
-        public InputAction @Square => m_Wrapper.m_UI_Square;
+        public InputAction @X => m_Wrapper.m_UI_X;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1126,9 +1212,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Square.started += instance.OnSquare;
-            @Square.performed += instance.OnSquare;
-            @Square.canceled += instance.OnSquare;
+            @X.started += instance.OnX;
+            @X.performed += instance.OnX;
+            @X.canceled += instance.OnX;
         }
 
         /// <summary>
@@ -1140,9 +1226,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UIActions" />
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Square.started -= instance.OnSquare;
-            @Square.performed -= instance.OnSquare;
-            @Square.canceled -= instance.OnSquare;
+            @X.started -= instance.OnX;
+            @X.performed -= instance.OnX;
+            @X.canceled -= instance.OnX;
         }
 
         /// <summary>
@@ -1220,26 +1306,26 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "R1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "RB" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnR1(InputAction.CallbackContext context);
+        void OnRB(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "R2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "RT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnR2(InputAction.CallbackContext context);
+        void OnRT(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Hold R2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Hold RT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHoldR2(InputAction.CallbackContext context);
+        void OnHoldRT(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Lock On" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1261,6 +1347,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSeekRightLockOnTarget(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Switch Right Weapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchRightWeapon(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Switch Left Weapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchLeftWeapon(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player Camera" which allows adding and removing callbacks.
@@ -1285,11 +1385,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Square" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "X" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSquare(InputAction.CallbackContext context);
+        void OnX(InputAction.CallbackContext context);
     }
 }

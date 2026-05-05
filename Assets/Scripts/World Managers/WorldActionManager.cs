@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class WorldActionManager : MonoBehaviour
     {

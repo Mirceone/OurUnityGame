@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     [CreateAssetMenu(menuName = "Character Effects/Instant Effects/Take Stamina Damage")]
     public class TakeStaminaDamageEffect : InstantCharacterEffect

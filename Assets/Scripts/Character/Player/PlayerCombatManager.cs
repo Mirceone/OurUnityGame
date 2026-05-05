@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class PlayerCombatManager : CharacterCombatManeger
     {
         PlayerManager player;
 
         public WeaponItem currentWeaponBeingUsed;
+
+        [Header("Flags")]
+        public bool canComboWithMainHandWeapon = false;
+        //public bool canComboWithOffHandWeapon = false;
 
         protected override void Awake()
         {

@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace  MySoulsProject
+namespace FuckingNamespace
 {
     public class ResetActionFlag : StateMachineBehaviour
     {
@@ -16,14 +18,16 @@ namespace  MySoulsProject
 
             //  THIS IS CALLED WHEN AN ACTION ENDS, AND THE STATE RETURNS TO "EMPTY"
             character.isPerformingAction = false;
-            character.applyRootMotion = false;
-            character.canRotate = true;
-            character.canMove = true;
+            character.characterAnimatorManager.applyRootMotion = false;
+            character.characterLocomotionManager.canRotate = true;
+            character.characterLocomotionManager.canMove = true;
             character.characterLocomotionManager.isRolling = false;
+            character.characterAnimatorManager.DisableCanDoCombo();
 
             if (character.IsOwner)
             {
                 character.characterNetworkManager.isJumping.Value = false;
+                character.characterNetworkManager.isInvulnerable.Value = false;
             }
         }
 
@@ -52,4 +56,3 @@ namespace  MySoulsProject
         //}
     }
 }
-

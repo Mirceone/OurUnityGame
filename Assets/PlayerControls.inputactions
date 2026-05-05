@@ -161,7 +161,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "R1",
+                    "name": "RB",
                     "type": "Button",
                     "id": "b46feb99-1dc8-4603-a1c0-b605342ddad7",
                     "expectedControlType": "",
@@ -170,7 +170,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "R2",
+                    "name": "RT",
                     "type": "Button",
                     "id": "9459c0c5-046c-4c0d-82fd-6a4fa53be15f",
                     "expectedControlType": "",
@@ -179,7 +179,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Hold R2",
+                    "name": "Hold RT",
                     "type": "PassThrough",
                     "id": "dd46084a-b6c5-4e51-be8a-02587060f5e4",
                     "expectedControlType": "Button",
@@ -209,6 +209,24 @@
                     "name": "Seek Right Lock On Target",
                     "type": "Button",
                     "id": "0072248a-bf9e-415a-8a29-4ca472c8b283",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Right Weapon",
+                    "type": "Button",
+                    "id": "a8da2366-130d-40f8-87a8-8091211e73f4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Left Weapon",
+                    "type": "Button",
+                    "id": "12933dfc-bdcc-4700-b7f6-5c140608ff92",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -289,7 +307,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "R1",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -300,7 +318,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "R1",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -311,7 +329,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "R2",
+                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -322,7 +340,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "R2",
+                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -333,7 +351,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Hold R2",
+                    "action": "Hold RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -344,7 +362,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Hold R2",
+                    "action": "Hold RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -389,6 +407,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Seek Right Lock On Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e59608e6-ebaf-4f42-aebe-8d65e0cc5912",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e848173b-8279-4810-a725-456ce68ccd1e",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94ffe6ab-b134-4602-a32f-a720a99877a7",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99bc0227-b17a-4ced-89e3-acb26192228f",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -482,7 +544,7 @@
             "id": "226d2d79-b43c-4e69-b7e5-ee98e4680407",
             "actions": [
                 {
-                    "name": "Square",
+                    "name": "X",
                     "type": "Button",
                     "id": "54c2848b-6c35-40dd-9cf5-f0fb8d069b7c",
                     "expectedControlType": "",
@@ -499,7 +561,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Square",
+                    "action": "X",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -510,7 +572,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Square",
+                    "action": "X",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

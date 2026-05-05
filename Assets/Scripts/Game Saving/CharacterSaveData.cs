@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     [System.Serializable]
     //  SINCE WE WANT TO REFERENCE THIS DATA FOR EVERY SAVE FILE, THIS SCRIPT IS NOT A MONOBEHAVIOUR AND IS INSTEAD SERIALIZABLE
@@ -29,5 +31,15 @@ namespace MySoulsProject
         [Header("Stats")]
         public int vitality;
         public int endurance;
+
+        [Header("Bosses")]
+        public SerializableDictionary<int, bool> bossesAwakened;    //  THE INT IS THE BOSS I.D, THE BOOL IS THE AWAKENED STATUS
+        public SerializableDictionary<int, bool> bossesDefeated;    //  THE INT IS THE BOSS I.D, THE BOOL IS THE DEFEATED STATUS
+
+        public CharacterSaveData()
+        {
+            bossesAwakened = new SerializableDictionary<int, bool>();
+            bossesDefeated = new SerializableDictionary<int, bool>();
+        }
     }
 }

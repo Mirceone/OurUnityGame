@@ -1,12 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class TitleScreenManager : MonoBehaviour
     {
-        public static TitleScreenManager instance;
+        public static TitleScreenManager Instance;
 
         [Header("Menus")]
         [SerializeField] GameObject titleScreenMainMenu;
@@ -28,9 +30,9 @@ namespace MySoulsProject
 
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
             }
             else
             {

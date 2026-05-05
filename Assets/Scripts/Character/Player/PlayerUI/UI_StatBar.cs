@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class UI_StatBar : MonoBehaviour
     {
@@ -39,5 +41,4 @@ namespace MySoulsProject
             }
         }
     }
-
 }

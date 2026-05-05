@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject 
-{
+namespace FuckingNamespace {
     public class DamageCollider : MonoBehaviour
     {
         [Header("Collider")]
@@ -39,7 +38,6 @@ namespace MySoulsProject
 
                 //  CHECK IF TARGET IS BLOCKING
 
-                //  CHECK IF TARGET IS INVULNERABLE
 
                 DamageTarget(damageTarget);
             }

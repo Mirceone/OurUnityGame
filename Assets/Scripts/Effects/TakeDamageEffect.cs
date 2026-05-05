@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     [CreateAssetMenu(menuName = "Character Effects/Instant Effects/Take Damage")]
     public class TakeDamageEffect : InstantCharacterEffect
@@ -42,13 +42,15 @@ namespace MySoulsProject
 
         public override void ProcessEffect(CharacterManager character)
         {
+            if (character.characterNetworkManager.isInvulnerable.Value)
+                return;
+
             base.ProcessEffect(character);
 
             //  IF THE CHARACTER IS DEAD, NO ADDITIONAL DAMAGE EFFECTS SHOULD BE PROCESSED
             if (character.isDead.Value)
                 return;
 
-            //  CHECK FOR "INVULNERABILITY"
             CalculateDamage(character);
             PlayDirectionalBasedDamageAnimation(character);
             //  CHECK FOR BUILD UPS (POISON, BLEED ECT)
@@ -99,6 +101,7 @@ namespace MySoulsProject
             AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
 
             character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+            character.characterSoundFXManager.PlayDamageGruntSoundFX();
             //  IF FIRE DAMAGE IS GREATER THAN 0, PLAY BURN SFX
             //  IF LIGHTNING DAMAGE IS GREATER THAN 0, PLAY ZAP SFX
         }

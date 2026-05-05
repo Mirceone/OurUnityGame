@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class WorldSaveGameManager : MonoBehaviour
     {
@@ -240,7 +241,7 @@ namespace MySoulsProject
             }
 
             //  IF THERE ARE NO FREE SLOTS, NOTIFY THE PLAYER
-            TitleScreenManager.instance.DisplayNoFreeCharacterSlotsPopUp();
+            TitleScreenManager.Instance.DisplayNoFreeCharacterSlotsPopUp();
         }
 
         private void NewGame()

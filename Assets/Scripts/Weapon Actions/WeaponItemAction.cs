@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     [CreateAssetMenu(menuName = "Character Actions/Weapon Actions/Test Action")]
     public class WeaponItemAction : ScriptableObject

@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace MySoulsProject
+namespace FuckingNamespace
 {
     public class PlayerEffectsManager : CharacterEffectsManager
     {
@@ -13,7 +15,6 @@ namespace MySoulsProject
             if (processEffect)
             {
                 processEffect = false;
-                // instantiate a copy so were not modifying the original 
                 InstantCharacterEffect effect = Instantiate(effectToTest);
                 ProcessInstantEffect(effect);
             }
